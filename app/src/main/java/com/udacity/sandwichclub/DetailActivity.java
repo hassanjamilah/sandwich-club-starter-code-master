@@ -57,19 +57,10 @@ public class DetailActivity extends AppCompatActivity {
         Sandwich sandwich = null;
         try {
             sandwich = JsonUtils.parseSandwichJson(json);
-
-            if (sandwich.getAlsoKnownAs() != null) {
-
-                for (String x :
-                        sandwich.getAlsoKnownAs()) {
-
-
-                }
-            }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         if (sandwich == null) {
             // Sandwich data unavailable
             closeOnError();
@@ -90,13 +81,21 @@ public class DetailActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * this method is used to convert a java list
+     * to a string separated with commas to display it in my UI
+     * @param data
+     * @return
+     */
     private String getStringWithCommas(List<String> data) {
         String s = "";
-        if (data == null || data.size() <= 0) return "";
+        if (data == null || data.size() <= 0) return s;
         for (int i = 0; i < data.size(); i++) {
             s = s + " , " + data.get(i);
 
         }
+        // I used the next line to remove the unncecessary null value with its comma
+        // without it the string will be like null , ... values
         s = s.substring(2, s.length() - 2).trim();
         return s;
     }
@@ -104,12 +103,10 @@ public class DetailActivity extends AppCompatActivity {
     private void populateUI(Sandwich sandwich) {
 
         alsoKnownAs_TextView.setText(getStringWithCommas(sandwich.getAlsoKnownAs()));
-        ;
         ingredients_TextView.setText(getStringWithCommas(sandwich.getIngredients()));
         origing_TextView.setText(sandwich.getPlaceOfOrigin());
-        ;
         description_TextView.setText(sandwich.getDescription());
-        ;
+
 
     }
 }

@@ -18,19 +18,7 @@ import java.util.List;
 public class JsonUtils {
 
 
-    static String sam = "name:{mainName:Gua bao," +
-            "alsoKnownAs:[Steamed bao,Pork belly bun]}," +
-            "placeOfOrigin:Taiwan," +
-            "description:Gua bao is a Taiwanese snack food   consisting of a slice of" +
-            " stewed meat and other condiments sandwiched between flat" +
-            "steamed bread. The steamed bread is typically 6–8 centimetres (2.4–3.1 in) in size," +
-            "semi-circular and flat in form, with a horizontal fold that, when opened, gives the" +
-            "appearance that it has been sliced. The traditional filling for gua bao is a slice of" +
-            "red-cooked porkbelly, typically dressed with stir-fried suan cai (pickled mustard" +
-            "greens), cilantro, and ground" +
-            "peanuts.," +
-            "image:https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Steamed_Sandwich%2Ctaken_by_LeoAlmighty.jpg/600px-Steamed_Sandwich%2Ctaken_by_LeoAlmighty.jpg," +
-            "ingredients:[Steamed bread,Stewed meat,Condiments] ";
+
 
     public static Sandwich parseSandwichJson(String json) throws JSONException {
 
@@ -52,16 +40,17 @@ public class JsonUtils {
         JSONArray ingreds = obj.getJSONArray("ingredients") ;
         mySandwich.setIngredients(getJsonArrayAsList(ingreds));
 
-
-
-
-
-
-
         return mySandwich;
     }
 
 
+    /**
+     * tbis method is used to get the json array that i have readen
+     * and convert it to java list
+     * @param values
+     * @return
+     * @throws JSONException
+     */
     private static List<String> getJsonArrayAsList(JSONArray values) throws JSONException {
 
         if (values.length() < 1) return null;
@@ -70,7 +59,6 @@ public class JsonUtils {
 
         for (int i = 0; i < values.length(); i++) {
             s = values.getString(i);
-            Log.i("hassan", s);
             vals.add(s);
         }
         return vals;
